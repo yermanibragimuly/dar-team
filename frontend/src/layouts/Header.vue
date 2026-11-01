@@ -2,7 +2,6 @@
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/auth/model/authStore'
-import { useCartStore } from '@/features/cart/cartStore'
 import Auth from '@/auth/pages/auth.vue'
 import Register from '@/auth/pages/Register.vue'
 import LanguageSwitcher from '@/features/language-switcher/LanguageSwitcher.vue'
@@ -11,7 +10,6 @@ import ResetPassword from '@/auth/pages/ResetPassword.vue'
 import 'primeicons/primeicons.css'
 
 const userStore = useUserStore()
-const cartStore = useCartStore()
 const router = useRouter()
 const scrolled = ref(false)
 const mobileMenu = ref(false)
@@ -40,7 +38,7 @@ const menuItems = [
   { to: '/news', label: 'menu.news', title: 'НОВОСТИ' },
   { to: '/branch', label: 'menu.branches', title: 'ФИЛИАЛЫ' },
   { to: '/outside', label: 'menu.outsideTheOctagon', title: 'ВНЕ ОКТАГОНА' },
-  { to: '/shop', label: 'menu.shop', title: 'МАГАЗИН' },
+  // { to: '/shop', label: 'menu.shop', title: 'МАГАЗИН' }, // Магазин скрыт для ветки without-store
   { to: '/about', label: 'menu.aboutUs', title: 'О НАС' }
 ]
 
@@ -72,9 +70,6 @@ const logoutElse = (key: string) => {
       break;
     case 'ROLE_MODERATOR':
       router.push('/admin/news')
-      break;
-    case 'ROLE_SHOP_MANAGER':
-      router.push('/admin/shop/orders')
       break;
     case 'ROLE_USER':
       router.push(`/profile`)
@@ -164,17 +159,7 @@ const openDialog = (action: string) => {
       </nav>
 
       <div class="flex items-center gap-4">
-        <!-- КОРЗИНА С БЕЙДЖЕМ КОЛИЧЕСТВА -->
-        <router-link to="/checkout" class="relative p-2 text-zinc-300 hover:text-white transition cursor-pointer" title="Корзина покупок">
-          <i class="pi pi-shopping-bag text-xl"></i>
-          <span 
-            v-if="cartStore.totalCount > 0" 
-            class="absolute -top-0.5 -right-0.5 bg-[#B00D15] text-white text-[10px] font-black w-4.5 h-4.5 rounded-full flex items-center justify-center shadow-lg animate-pulse"
-          >
-            {{ cartStore.totalCount }}
-          </span>
-        </router-link>
-
+        <!-- Языковой переключатель -->
         <LanguageSwitcher />
 
         <div class="relative inline-block">
@@ -195,14 +180,13 @@ const openDialog = (action: string) => {
             <i class="pi pi-user text-2xl"></i>
           </div>
 
-          <!-- Выпадающее меню -->
           <div
             v-if="dropdownVisible"
             class="absolute left-1/2 -translate-x-1/2 mt-2 w-32 bg-[#1f1f1f] border border-zinc-700 bg-gray-900/95 rounded-lg shadow-lg z-50 overflow-hidden"
           >
             <ul class="flex flex-col text-white text-xs">
               <li
-                v-if="['ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_SHOP_MANAGER', 'ROLE_USER'].includes(isAdmin)"
+                v-if="['ROLE_ADMIN', 'ROLE_MODERATOR', 'ROLE_USER'].includes(isAdmin)"
                 class="px-4 py-2 hover:bg-[#B00D15] cursor-pointer text-center"
                 @click="logoutElse(isAdmin)"
               >

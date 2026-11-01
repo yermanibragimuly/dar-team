@@ -89,6 +89,7 @@ const routes = [
       name: 'About',
       component: () => import('../components/aboutUsPage/backWallAbout/BackWallAbout.vue')
     },
+    /* Страницы магазина временно отключены для ветки without-store
     {
       path: '/shop',
       name: 'Shop',
@@ -109,6 +110,7 @@ const routes = [
       name: 'MockPayment',
       component: () => import('../views/MockPaymentView.vue')
     },
+    */
     {
       path: '/auth',
       name: 'auth',
@@ -151,6 +153,7 @@ const routes = [
           meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_MODERATOR'] },
           component: () => import('../admin/pages/partners.vue'),
         },
+        /* Разделы магазина в админке временно отключены
         {
           path: 'shop',
           name: 'AdminShop',
@@ -169,6 +172,7 @@ const routes = [
           meta: { requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_SHOP_MANAGER'] },
           component: () => import('../admin/pages/BranchStockAdmin.vue'),
         },
+        */
         {
           path: 'users',
           name: 'AdminUsers',
@@ -204,11 +208,6 @@ router.beforeEach((to: any, _from: any, next) => {
   const userStore = useUserStore()
   const isAuthenticated = !!userStore.token
   const userRoles = (Array.isArray(userStore.roles) ? userStore.roles : [userStore.roles]) as string[] || []
-
-  // Редирект менеджера магазина сразу в заказы
-  if (to.path === '/admin' && userRoles.includes('ROLE_SHOP_MANAGER') && !userRoles.includes('ROLE_ADMIN')) {
-    return next('/admin/shop/orders')
-  }
 
   if (to.meta.requiresAuth && !isAuthenticated) {
     showError("Для доступа нужно войти в систему")

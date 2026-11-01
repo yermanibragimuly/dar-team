@@ -27,7 +27,7 @@
         </nav>
       </div>
 
-      <!-- Блок ЭКИПИРОВКА & МАГАЗИН -->
+      <!-- Блок ЭКИПИРОВКА & МАГАЗИН (ВРЕМЕННО СКРЫТ ДЛЯ ВЕТКИ without-store)
       <div v-if="canAccess(['ROLE_ADMIN', 'ROLE_SHOP_MANAGER'])">
         <span class="text-[11px] font-bold text-[#71717A] uppercase tracking-wider block mb-2 px-2">МАГАЗИН</span>
         <nav class="flex flex-col gap-1">
@@ -40,7 +40,6 @@
             <span>Заказы мерча</span>
           </router-link>
 
-          <!-- Склад филиала (для менеджера зала и админа) -->
           <router-link
             to="/admin/shop/branch-stock"
             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9CA3AF] hover:bg-[#2a2a2d] hover:text-white font-medium text-sm transition-all"
@@ -50,7 +49,6 @@
             <span>Склад филиала</span>
           </router-link>
 
-          <!-- Каталог товаров (только главный админ) -->
           <router-link
             v-if="canAccess(['ROLE_ADMIN'])"
             to="/admin/shop"
@@ -62,6 +60,7 @@
           </router-link>
         </nav>
       </div>
+      -->
 
       <!-- Блок КОНТЕНТ -->
       <div v-if="canAccess(['ROLE_ADMIN', 'ROLE_MODERATOR'])">
@@ -85,7 +84,6 @@
             <span>Видео</span>
           </router-link>
 
-          <!-- Партнеры с иконкой рукопожатия -->
           <router-link
             to="/admin/partners"
             class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#9CA3AF] hover:bg-[#2a2a2d] hover:text-white font-medium text-sm transition-all"
