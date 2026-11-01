@@ -1,0 +1,32 @@
+{
+    email arman_97_97@mail.ru
+}
+
+localhost {
+    encode zstd gzip
+
+    handle_path /api* {
+        reverse_proxy backend:8080
+    }
+
+    # Раздаем статику из примонтированной папки ./frontend/dist
+    handle {
+        root * /srv/www
+        try_files {path} /index.html
+        file_server
+    }
+
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "no-referrer-when-downgrade"
+    }
+}
+
+minio.localhost {
+    reverse_proxy minio:9001
+}
+
+s3.localhost {
+    reverse_proxy minio:9000
+}

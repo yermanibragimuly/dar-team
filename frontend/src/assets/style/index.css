@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  background-color: #121212;
+  overscroll-behavior-y: none;
+}
+
+/* Главный layout */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #121212;
+}
+
+/* Контент растягивается */
+.app-content {
+  flex: 1;
+  background-color: #121212;
+}

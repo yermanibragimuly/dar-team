@@ -1,0 +1,26 @@
+# Зависимости и сборка фронтенда
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.env.local
+*.tsbuildinfo
+
+# Сборка бэкенда Java / Maven
+backend/demo/target/
+backend/demo/.mvn/wrapper/maven-wrapper.jar
+backend/app.jar
+*.class
+
+# Временные файлы и дампы Repomix
+repomix-output.xml
+**/repomix-output.xml
+*.log
+
+# Настройки IDE
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Конфиги Obsidian
+.obsidian/

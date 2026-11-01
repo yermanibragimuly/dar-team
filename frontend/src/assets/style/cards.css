@@ -1,0 +1,37 @@
+/* ===== DARK CARD (GLOBAL) ===== */
+.p-card.dark-card {
+  background-color: #18181B;
+  color: #E5E7EB;
+  border-radius: 14px;
+  border: 1px solid #27272A;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.p-card.dark-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
+
+/* header */
+.p-card.dark-card .p-card-header {
+  padding: 0;
+  background-color: #000;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+/* body */
+.p-card.dark-card .p-card-body {
+  background-color: #18181B;
+  border-radius: 14px;
+}
+
+/* title */
+.p-card.dark-card .p-card-title {
+  color: #F9FAFB;
+}
+
+/* subtitle */
+.p-card.dark-card .p-card-subtitle {
+  color: #9CA3AF;
+}
